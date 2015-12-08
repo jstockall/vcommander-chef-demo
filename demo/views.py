@@ -4,20 +4,8 @@ from django.http import HttpResponse
 from django.db import connection
 
 def index(request):
-    cursor = connection.cursor()
-    cursor.execute("SELECT now();")
-    dbtime = cursor.fetchone()[0]
     response = HttpResponse()
-    response.write("<head><title>Embotics vCommander Demo: <%= node.name %></title></head><p>")
-    html = Template('<img src="{{ STATIC_URL }}chef.png" />')
-    response.write(html.render(RequestContext(request)))
-    html = Template('<img src="{{ STATIC_URL }}vmware.jpg" />')
-    response.write(html.render(RequestContext(request)))
-    response.write("</p><br><h1>Welcome to the Embotics Chef Demo Server!<h1>")
-    response.write("<h2><%= node.cloud.public_hostname %> on <%= node.cloud.public_ipv4 %><br><br>")
-    response.write("MySQL connected on <%= @db.cloud.public_hostname %>:<%= @db['mysql']['port'] %><br><br>")
-    response.write("Last updated by Chef at <%= Time.now %><br><br>")
-    response.write("Database time:")
-    response.write(dbtime)
-    response.write("</h2>")
+    response.write("<head><title>Default Django Application</title></head>")
+    response.write("<h1>Default Django Application<h1>")
+    response.write("<h2>It Works!</h2>")
     return response
